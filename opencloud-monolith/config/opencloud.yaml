@@ -99,12 +99,16 @@ services:
       NATS_NATS_HOST: "{{.configs.opencloud.nats.listen}}"
       NATS_NATS_PORT: "{{.configs.opencloud.nats.port}}"
       PROXY_CSP_CONFIG_FILE_LOCATION: /etc/opencloud/csp.yaml
+      # these three vars are needed to the csp config file to include the web office apps and the importer
+      COLLABORA_DOMAIN: "{{.configs.opencloud.domain.collabora}}"
+      ONLYOFFICE_DOMAIN: "{{.configs.opencloud.domain.onlyoffice}}"
+      COMPANION_DOMAIN: "{{.configs.opencloud.domain.companion}}"
       # enable to allow using the banned passwords list
       OC_PASSWORD_POLICY_BANNED_PASSWORDS_LIST: banned-password-list.txt
     volumes:
-      - "{{.repos.files.opencloud_app_registry.path}}:/etc/opencloud/app-registry.yaml"
-      - "{{.repos.files.opencloud_csp.path}}:/etc/opencloud/csp.yaml"
-      - "{{.repos.files.banned_password_list.path}}:/etc/opencloud/banned-password-list.txt"
+      - "{{.repos.files.opencloud_app_registry.path}}:/etc/opencloud/app-registry.yaml:ro"
+      - "{{.repos.files.opencloud_csp.path}}:/etc/opencloud/csp.yaml:ro"
+      - "{{.repos.files.banned_password_list.path}}:/etc/opencloud/banned-password-list.txt:ro"
       - "{{.configs.opencloud.docker.volumes.config}}:/etc/opencloud"
       - "{{.configs.opencloud.docker.volumes.data}}:/var/lib/opencloud"
     labels:
