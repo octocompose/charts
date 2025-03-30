@@ -1,0 +1,26 @@
+include:
+  - url: ./extensions.yaml
+
+repos:
+  services:
+    unzip-init:
+      docker:
+        registry: docker.io
+        image: opencloudeu/web-extensions
+        # release notes: https://blog.clamav.net
+        tag: unzip-1.0.0
+        entrypoint: "/bin/sh"
+        command: ["-c", "cp -R /usr/share/nginx/html/unzip/ /apps"]
+
+services:
+  opencloud:
+    depends_on:
+      unzip-init:
+        condition: service_completed_successfully
+
+  unzip-init:
+    user: root
+    volumes:
+      - opencloud-apps:/apps
+
+

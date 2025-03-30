@@ -2,8 +2,8 @@
 configs:
   collabora:
     ssl:
-      enable: "true"
-      verification: "true"
+      enable: "false"
+      verification: "false"
       termination: "true"
       welcome: "false"
     admin:
@@ -11,9 +11,22 @@ configs:
       password: "admin"
 
 repos:
-  include:
-    - url: ../repo/collabora.yaml
-  
+  services:
+    collabora:
+      docker:
+        registry: docker.io
+        image: collabora/code
+        tag: 24.04.13.2.1
+        entrypoint: /bin/bash
+        command: ["-c", "coolconfig generate-proof-key ; /start-collabora-online.sh"]  
+    collaboration:
+      docker:
+        registry: docker.io
+        image: opencloudeu/opencloud-rolling
+        tag: 2.0.0
+        entrypoint: /bin/sh
+        command: [ "-c", "opencloud collaboration server" ]
+
 services:
   opencloud:
     environment:

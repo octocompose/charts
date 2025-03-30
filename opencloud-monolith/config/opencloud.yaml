@@ -42,8 +42,6 @@ configs:
         data: "opencloud-data"
 
 repos:
-  include:
-    - url: ../repo/opencloud.yaml
   files:
     opencloud_app_registry:
       url: ../files/opencloud/app-registry.yaml
@@ -52,7 +50,14 @@ repos:
       template: true
     banned_password_list:
       url: ../files/opencloud/banned-password-list.txt
-
+  services:
+    opencloud:
+      docker:
+        registry: docker.io
+        image: opencloudeu/opencloud-rolling
+        tag: 2.0.0
+        entrypoint: /bin/sh
+        command: ["-c", "opencloud init || true; opencloud server"]
 
 services:
   traefik:

@@ -1,0 +1,24 @@
+include:
+  - url: ./extensions.yaml
+
+repos:
+  services:
+    progressbars-init:
+      docker:
+        registry: docker.io
+        image: opencloudeu/web-extensions
+        # release notes: https://blog.clamav.net
+        tag: progress-bars-1.0.0
+        entrypoint: "/bin/sh"
+        command: ["-c", "cp -R /usr/share/nginx/html/progress-bars/ /apps"]
+
+services:
+  opencloud:
+    depends_on:
+      progressbars-init:
+        condition: service_completed_successfully
+
+  progressbars-init:
+    user: root
+    volumes:
+      - opencloud-apps:/apps

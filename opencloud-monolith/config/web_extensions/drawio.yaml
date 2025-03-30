@@ -1,0 +1,24 @@
+include:
+  - url: ./extensions.yaml
+
+repos:
+  services:
+    drawio-init:
+      docker:
+        registry: docker.io
+        image: opencloudeu/web-extensions
+        # release notes: https://blog.clamav.net
+        tag: draw-io-1.0.0
+        entrypoint: "/bin/sh"
+        command: ["-c", "cp -R /usr/share/nginx/html/draw-io/ /apps"]
+
+services:
+  opencloud:
+    depends_on:
+      drawio-init:
+        condition: service_completed_successfully
+
+  drawio-init:
+    user: root
+    volumes:
+      - opencloud-apps:/apps
