@@ -1,0 +1,23 @@
+repos:
+  services:
+    tika:
+      docker:
+        registry: docker.io
+        image: apache/tika
+        # release notes: https://tika.apache.org
+        tag: 3.1.0.0-full
+
+services:
+  tika:
+    networks:
+      opencloud-net:
+    restart: "{{.configs.opencloud.docker.restart}}"
+    logging:
+      driver: "{{.configs.opencloud.docker.log_driver}}"
+
+  opencloud:
+    environment:
+      # fulltext search
+      SEARCH_EXTRACTOR_TYPE: tika
+      SEARCH_EXTRACTOR_TIKA_TIKA_URL: http://tika:9998
+      FRONTEND_FULL_TEXT_SEARCH_ENABLED: "true"
