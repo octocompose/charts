@@ -4,7 +4,6 @@ configs:
     # admin:admin basic auth
     auth: "admin:$$apr1$$4vqie50r$$YQAmQdtmz5n9rEALhxJ4l."
     dashboard: "false"
-    log_level: "ERROR"
     acme:
       email: "example@example.org"
       storage: "/certs/acme.json"
@@ -20,7 +19,7 @@ repos:
         image: library/traefik
         tag: v3.3.1
         command:
-          - "--log.level={{.configs.traefik.log_level}}"
+          - "--log.level=ERROR"
           # letsencrypt configuration
           - "--certificatesResolvers.http.acme.email={{.configs.traefik.acme.email}}"
           - "--certificatesResolvers.http.acme.storage=/certs/acme.json"
