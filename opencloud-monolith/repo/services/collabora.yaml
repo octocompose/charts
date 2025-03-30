@@ -1,0 +1,8 @@
+services:
+  collabora:
+    docker:
+      registry: docker.io
+      image: collabora/code
+      tag: 24.04.13.2.1
+      entrypoint: /bin/sh
+      command: [ "-c", "opencloud collaboration server" ]

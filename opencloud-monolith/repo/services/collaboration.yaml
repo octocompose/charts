@@ -1,0 +1,8 @@
+services:
+  collaboration:
+    docker:
+      registry: docker.io
+      image: opencloudeu/opencloud-rolling
+      tag: 2.0.0
+      entrypoint: /bin/bash
+      command: ["-c", "coolconfig generate-proof-key ; /start-collabora-online.sh"]

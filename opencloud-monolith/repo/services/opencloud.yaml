@@ -1,0 +1,8 @@
+services:
+  opencloud:
+    docker:
+      registry: docker.io
+      image: opencloudeu/opencloud-rolling
+      tag: 2.0.0
+      entrypoint: /bin/sh
+      command: ["-c", "opencloud init || true; opencloud server"]
