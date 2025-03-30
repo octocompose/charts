@@ -1,5 +1,5 @@
 # Service configurations
-globals:
+configs:
   opencloud:
     additionalServices: "notifications"
     scheme: https
