@@ -15,42 +15,41 @@ repos:
   services:
     traefik:
       docker:
+        # release notes: https://github.com/traefik/traefik/releases
         registry: docker.io
         image: library/traefik
         tag: v3.3.1
+      command:
+        - "--log.level={{.configs.traefik.log_level}}"
+        # letsencrypt configuration
+        - "--certificatesResolvers.http.acme.email={{.configs.traefik.acme.email}}"
+        - "--certificatesResolvers.http.acme.storage=/certs/acme.json"
+        - "--certificatesResolvers.http.acme.httpChallenge.entryPoint=http"
+        - "--certificatesResolvers.http.acme.caserver={{.configs.traefik.acme.caserver}}"
+        # enable dashboard
+        - "--api.dashboard={{.configs.traefik.dashboard}}"
+        # define entrypoints
+        - "--entryPoints.http.address=:80"
+        - "--entryPoints.http.http.redirections.entryPoint.to=https"
+        - "--entryPoints.http.http.redirections.entryPoint.scheme=https"
+        - "--entryPoints.https.address=:443"
+        # change default timeouts for long-running requests
+        # this is needed for webdav clients that do not support the TUS protocol
+        - "--entryPoints.https.transport.respondingTimeouts.readTimeout=12h"
+        - "--entryPoints.https.transport.respondingTimeouts.writeTimeout=12h"
+        - "--entryPoints.https.transport.respondingTimeouts.idleTimeout=3m"
+        # docker provider (get configuration from container labels)
+        - "--providers.docker.endpoint=unix:///var/run/docker.sock"
+        - "--providers.docker.exposedByDefault=false"
+        # access log
+        - "--accessLog=true"
+        - "--accessLog.format=json"
+        - "--accessLog.fields.headers.names.X-Request-Id=keep"
 
 services:
   traefik:
-    image: "{{.repos.services.traefik.docker.registry}}/{{.repos.services.traefik.docker.image}}:{{.repos.services.traefik.docker.tag}}"
-    # release notes: https://github.com/traefik/traefik/releases
     networks:
       opencloud-net:
-    command:
-      - "--log.level={{.configs.traefik.log_level}}"
-      # letsencrypt configuration
-      - "--certificatesResolvers.http.acme.email={{.configs.traefik.acme.email}}"
-      - "--certificatesResolvers.http.acme.storage=/certs/acme.json"
-      - "--certificatesResolvers.http.acme.httpChallenge.entryPoint=http"
-      - "--certificatesResolvers.http.acme.caserver={{.configs.traefik.acme.caserver}}"
-      # enable dashboard
-      - "--api.dashboard={{.configs.traefik.dashboard}}"
-      # define entrypoints
-      - "--entryPoints.http.address=:80"
-      - "--entryPoints.http.http.redirections.entryPoint.to=https"
-      - "--entryPoints.http.http.redirections.entryPoint.scheme=https"
-      - "--entryPoints.https.address=:443"
-      # change default timeouts for long-running requests
-      # this is needed for webdav clients that do not support the TUS protocol
-      - "--entryPoints.https.transport.respondingTimeouts.readTimeout=12h"
-      - "--entryPoints.https.transport.respondingTimeouts.writeTimeout=12h"
-      - "--entryPoints.https.transport.respondingTimeouts.idleTimeout=3m"
-      # docker provider (get configuration from container labels)
-      - "--providers.docker.endpoint=unix:///var/run/docker.sock"
-      - "--providers.docker.exposedByDefault=false"
-      # access log
-      - "--accessLog=true"
-      - "--accessLog.format=json"
-      - "--accessLog.fields.headers.names.X-Request-Id=keep"
     ports:
       - "80:80"
       - "443:443"
