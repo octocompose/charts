@@ -1,0 +1,6 @@
+include:
+  - url: ./drawio.yaml
+  - url: ./externalsites.yaml
+  - url: ./jsonviewer.yaml
+  - url: ./progressbars.yaml
+  - url: ./unzip.yaml
