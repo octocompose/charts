@@ -102,6 +102,10 @@ services:
       - "traefik.http.services.opencloud.loadbalancer.server.port=9200"
     logging:
       driver: "{{.configs.opencloud.docker.log_driver}}"
+
 volumes:
   opencloud-config:
   opencloud-data:
+
+networks:
+  opencloud-net:
