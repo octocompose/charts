@@ -2,7 +2,7 @@
 configs:
   opencloud:
     additionalServices: "notifications"
-    scheme: https
+    scheme: http
     domain:
       oc: cloud.opencloud.test
       collabora: collabora.opencloud.test
@@ -55,6 +55,12 @@ repos:
 
 
 services:
+  traefik:
+    networks:
+      opencloud-net:
+        aliases:
+          - "{{.configs.opencloud.domain.oc}}"
+
   opencloud:
     restart: "{{.configs.opencloud.docker.restart}}"
     networks:
