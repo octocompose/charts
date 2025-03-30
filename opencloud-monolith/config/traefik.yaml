@@ -17,7 +17,7 @@ repos:
         # release notes: https://github.com/traefik/traefik/releases
         registry: docker.io
         image: library/traefik
-        tag: v3.3.1
+        tag: v3.3.4
         command:
           - "--log.level=ERROR"
           # letsencrypt configuration
@@ -53,7 +53,7 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - "${DOCKER_SOCKET_PATH:-/var/run/docker.sock}:/var/run/docker.sock:ro"
+      - /var/run/docker.sock:/var/run/docker.sock:ro
       - "certs:/certs"
     labels:
       - "traefik.enable={{.configs.traefik.dashboard}}"

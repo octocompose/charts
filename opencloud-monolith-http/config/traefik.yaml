@@ -5,7 +5,7 @@ repos:
         # release notes: https://github.com/traefik/traefik/releases
         registry: docker.io
         image: library/traefik
-        tag: v3.3.1
+        tag: v3.3.4
         command:
           - --log.level=INFO
           # define entrypoints
@@ -30,9 +30,8 @@ services:
       opencloud-net:
     ports:
       - "80:80"
-      - "443:443"
     volumes:
-      - "${DOCKER_SOCKET_PATH:-/var/run/docker.sock}:/var/run/docker.sock:ro"
+      - /var/run/docker.sock:/var/run/docker.sock:ro
       - "certs:/certs"
     logging:
       driver: "{{.configs.opencloud.docker.log_driver}}"

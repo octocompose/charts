@@ -15,12 +15,6 @@ repos:
     - url: ../repo/collabora.yaml
   
 services:
-  traefik:
-    networks:
-      opencloud-net:
-        aliases:
-          - "{{.configs.opencloud.domain.collabora}}"
-          - "{{.configs.opencloud.domain.wopiserver}}"
   opencloud:
     environment:
       FRONTEND_APP_HANDLER_SECURE_VIEW_APP_ADDR: eu.opencloud.api.collaboration.CollaboraOnline
