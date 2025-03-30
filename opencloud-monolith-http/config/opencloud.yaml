@@ -71,7 +71,7 @@ services:
     environment:
       # enable services that are not started automatically
       OC_ADD_RUN_SERVICES: "{{.configs.opencloud.additionalServices}}"
-      OC_URL: "{{.configs.opencloud.scheme}}://{{.configs.opencloud.domain.oc}}"
+      OC_URL: "https://{{.configs.opencloud.domain.oc}}"
       OC_LOG_LEVEL: "{{.configs.opencloud.log.level}}"
       OC_LOG_COLOR: "{{.configs.opencloud.log.color}}"
       OC_LOG_PRETTY: "{{.configs.opencloud.log.pretty}}"
