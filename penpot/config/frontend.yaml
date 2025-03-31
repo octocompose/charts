@@ -32,6 +32,9 @@ services:
       # Max multipart body size (350MiB)
       PENPOT_HTTP_SERVER_MAX_MULTIPART_BODY_SIZE: "{{.configs.penpot.sizes.max_multipart_body}}"
 
+      PENPOT_BACKEND_URI: http://backend:6060
+      PENPOT_EXPORTER_URI: http://exporter:6061
+
 volumes:
   assets:
   
