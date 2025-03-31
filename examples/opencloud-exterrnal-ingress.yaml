@@ -1,0 +1,44 @@
+name: opencloud01
+include:
+  - url: https://raw.githubusercontent.com/octocompose/charts/refs/heads/main/apps/opencloud-monolith/config/opencloud.yaml
+  - url: https://raw.githubusercontent.com/octocompose/charts/refs/heads/main/apps/opencloud-monolith/config/collabora.yaml
+  - url: https://raw.githubusercontent.com/octocompose/charts/refs/heads/main/apps/opencloud-monolith/config/tika.yaml
+
+  - url: https://raw.githubusercontent.com/octocompose/charts/refs/heads/main/apps/opencloud-monolith/config/web_extensions/all.yaml
+
+configs:
+    collabora:
+        admin:
+            password: thatsNoSecret
+            user: admin
+    opencloud:
+        domain:
+            collabora: collabora.example.com
+            companion: companion.example.com
+            oc: cloud.example.com
+            onlyoffice: onlyoffice.example.com
+            wopiserver: wopi.example.com
+        idp:
+            adminPassword: thatsNoSecret
+        smtp:
+            authentication: plain
+            host: mail.example.com
+            insecure: "false"
+            password: thatsNoSecret
+            port: 587
+            sender: OpenCloud notifications <cloud@example.com>
+            username: cloud@example.com
+
+octoctl:
+  operator: docker
+
+services:
+  opencloud:
+    ports:
+      - 9200:9200
+  collaboration:
+    ports:
+      - 9300:9300
+  collabora:
+    ports:
+      - 9980:9980
