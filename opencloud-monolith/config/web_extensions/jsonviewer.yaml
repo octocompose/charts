@@ -1,6 +1,3 @@
-include:
-  - url: ./extensions.yaml
-
 repos:
   services:
     jsonviewer-init:

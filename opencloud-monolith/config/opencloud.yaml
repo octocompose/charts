@@ -112,6 +112,7 @@ services:
       - "{{.repos.files.banned_password_list.path}}:/etc/opencloud/banned-password-list.txt:ro"
       - "{{.configs.opencloud.docker.volumes.config}}:/etc/opencloud"
       - "{{.configs.opencloud.docker.volumes.data}}:/var/lib/opencloud"
+      - opencloud-apps:/var/lib/opencloud/web/assets/apps
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.opencloud.entrypoints=https"
@@ -125,6 +126,7 @@ services:
 volumes:
   opencloud-config:
   opencloud-data:
+  opencloud-apps:
 
 networks:
   opencloud-net:
