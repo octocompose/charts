@@ -1,0 +1,27 @@
+configs:
+  penpot:
+    public_uri: http://localhost:9001
+    flags: disable-email-verification enable-smtp enable-prepl-server disable-secure-session-cookies
+    sizes:
+      max_body: 31457280
+      max_multipart_body: 367001600
+    postgres:
+      url: postgresql://postgres/penpot
+      user: penpot
+      password: penpot
+  postgres:
+    db: penpot
+    user: penpot
+    password: penpot
+  smtp:
+    from: penpot@example.com
+    reply_to: penpot@example.com
+    host: mail.example.com
+    port: 587
+    username: penpot
+    password: penpot
+    tls: true
+    ssl: false
+
+networks:
+  penpot:

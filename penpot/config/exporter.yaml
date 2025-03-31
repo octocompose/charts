@@ -1,0 +1,30 @@
+include:
+  - url: ./config.yaml
+
+repos:
+  services:
+    exporter:
+      docker:
+        registry: docker.io
+        image: penpot/exporter
+        # https://hub.docker.com/r/penpotapp/exporter/tags
+        tag: 2.5.4
+
+services:
+  exporter:
+    restart: always
+
+    depends_on:
+      redis:
+        condition: service_healthy
+
+    networks:
+      - penpot
+
+    environment:
+      # Don't touch it; this uses an internal docker network to
+      # communicate with the frontend.
+      PENPOT_PUBLIC_URI: http://frontend:8080
+
+      ## Redis is used for the websockets notifications.
+      PENPOT_REDIS_URI: redis://redis/0

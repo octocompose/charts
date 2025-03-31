@@ -1,0 +1,22 @@
+repos:
+  services:
+    redis:
+      docker:
+        registry: docker.io
+        image: library/redis
+        # https://hub.docker.com/_/redis/tags
+        tag: 7.4.2
+
+services:
+  redis:
+    restart: always
+
+    healthcheck:
+      test: ["CMD-SHELL", "redis-cli ping | grep PONG"]
+      interval: 1s
+      timeout: 3s
+      retries: 5
+      start_period: 3s
+
+    networks:
+      - penpot

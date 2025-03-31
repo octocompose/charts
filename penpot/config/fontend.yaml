@@ -1,0 +1,37 @@
+include:
+  - url: ./config.yaml
+
+repos:
+  services:
+    frontend:
+      docker:
+        registry: docker.io
+        image: penpot/frontend
+        # https://hub.docker.com/r/penpotapp/frontend/tags
+        tag: 2.5.4
+
+services:
+  frontend:
+    restart: always
+    ports:
+      - 9001:8080
+    volumes:
+      - assets:/opt/data/assets
+    depends_on:
+      - backend
+      - exporter
+    networks:
+      - penpot
+    environment:
+      PENPOT_FLAGS: "{{.configs.penpot.flags}}"
+      
+      # Max body size (30MiB); Used for plain requests, should never be
+      # greater than multi-part size
+      PENPOT_HTTP_SERVER_MAX_BODY_SIZE: "{{.configs.penpot.sizes.max_body}}"
+      
+      # Max multipart body size (350MiB)
+      PENPOT_HTTP_SERVER_MAX_MULTIPART_BODY_SIZE: "{{.configs.penpot.sizes.max_multipart_body}}"
+
+volumes:
+  assets:
+  
