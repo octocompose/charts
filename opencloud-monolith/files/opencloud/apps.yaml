@@ -1,6 +1,6 @@
 importer:
   config:
-    companionUrl: https://${COMPANION_DOMAIN|companion.opencloud.test}
+    companionUrl: https://{{.configs.opencloud.domain.companion}}
     supportedClouds:
       - WebdavPublicLink
       #- OneDrive # needs a client id and secret

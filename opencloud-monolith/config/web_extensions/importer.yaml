@@ -11,7 +11,7 @@ configs:
 repos:
   files:
     opencloud_apps:
-      url: ../files/opencloud/apps.yaml
+      url: ../../files/opencloud/apps.yaml
       template: true
   services:
     importer-init:
