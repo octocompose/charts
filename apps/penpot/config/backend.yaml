@@ -1,6 +1,6 @@
 include:
-  - url: ../../library/redis/redis.yaml
-  - url: ../../library/postgres/15/postgres.yaml
+  - url: ../../../library/redis/redis.yaml
+  - url: ../../../library/postgres/15/postgres.yaml
 
 repos:
   services:
