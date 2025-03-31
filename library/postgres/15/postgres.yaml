@@ -1,5 +1,8 @@
-include:
-  - url: ./config.yaml
+configs:
+  postgres:
+    db: penpot
+    user: penpot
+    password: penpot
 
 repos:
   services:
@@ -16,7 +19,7 @@ services:
     stop_signal: SIGINT
 
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U penpot"]
+      test: ["CMD-SHELL", "pg_isready -U {{.configs.postgres.user}}"]
       interval: 2s
       timeout: 10s
       retries: 5
@@ -24,9 +27,6 @@ services:
 
     volumes:
       - postgres:/var/lib/postgresql/data
-
-    networks:
-      - penpot
 
     environment:
       - POSTGRES_INITDB_ARGS=--data-checksums

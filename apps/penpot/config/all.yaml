@@ -2,6 +2,4 @@ include:
   - url: ./backend.yaml
   - url: ./exporter.yaml
   - url: ./frontend.yaml
-  - url: ./postgres.yaml
-  - url: ./redis.yaml
   

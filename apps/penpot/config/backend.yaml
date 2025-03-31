@@ -1,3 +1,7 @@
+include:
+  - url: ../../library/redis/redis.yaml
+  - url: ../../library/postgres/15/postgres.yaml
+
 repos:
   services:
     backend:
@@ -7,8 +11,15 @@ repos:
         # https://hub.docker.com/r/penpotapp/backend/tags
         tag: 2.5.4
 
-
 services:
+  redis:
+    networks:
+      - penpot
+
+  postgres:
+    networks:
+      - penpot
+
   backend:
     restart: always
 
