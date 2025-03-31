@@ -8,7 +8,7 @@ configs:
       email: "example@example.org"
       storage: "/certs/acme.json"
       http: true
-      caserver: "https://acme-v02.api.letsencrypt.org/directory"
+      caserver: "https://acme-v02-staging.api.letsencrypt.org/directory"
 
 repos:
   services:

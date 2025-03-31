@@ -1,4 +1,6 @@
 include:
+  - url: ./extensions.yaml
+  - url: ./importer.yaml
   - url: ./drawio.yaml
   - url: ./externalsites.yaml
   - url: ./jsonviewer.yaml

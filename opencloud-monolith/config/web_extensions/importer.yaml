@@ -1,0 +1,77 @@
+include:
+  - url: ./extensions.yaml
+
+configs:
+  opencloud:
+    companion:
+      onedrive:
+        key: ""
+        secret: ""
+
+repos:
+  files:
+    opencloud_apps:
+      url: ../files/opencloud/apps.yaml
+      template: true
+  services:
+    importer-init:
+      docker:
+        registry: docker.io
+        image: opencloudeu/web-extensions
+        tag: importer-1.0.0
+        entrypoint: "/bin/sh"
+        command: ["-c", "cp -R /usr/share/nginx/html/importer/ /apps"]
+    opencloud:
+      docker:
+        registry: docker.io
+        image: opencloudeu/opencloud-rolling
+        tag: 2.0.0
+        entrypoint: /bin/sh
+        command: ["-c", "opencloud init || true; opencloud server"]
+    companion:
+      docker:
+        registry: docker.io
+        image: transloadit/companion
+        tag: 5.5.0
+
+services:
+  opencloud:
+    volumes:
+      # the cloud importer needs to be enabled in the web.yaml
+      - "{{.repos.files.opencloud_apps.path}}:/etc/opencloud/apps.yaml:ro"
+    depends_on:
+      importer-init:
+        condition: service_completed_successfully
+
+  importer-init:
+    user: root
+    volumes:
+      - opencloud-apps:/apps
+
+  companion:
+    networks:
+      - opencloud-net
+    environment:
+      NODE_ENV: production
+      NODE_TLS_REJECT_UNAUTHORIZED: 0
+      COMPANION_DATADIR: /tmp/companion/
+      COMPANION_DOMAIN: "{{.configs.opencloud.domain.companion}}"
+      COMPANION_PROTOCOL: https
+      COMPANION_UPLOAD_URLS: "^{{.configs.opencloud.domain.oc}}/"
+      COMPANION_ONEDRIVE_KEY: "{{.configs.opencloud.companion.onedrive.key}}"
+      COMPANION_ONEDRIVE_SECRET: "{{.configs.opencloud.companion.onedrive.secret}}"
+    volumes:
+      - companion-data:/tmp/companion/
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.companion.entrypoints=https"
+      - "traefik.http.routers.companion.rule=Host(`{{.configs.opencloud.domain.companion}}`)"
+      - "traefik.http.routers.companion.tls.certresolver=http"
+      - "traefik.http.routers.companion.service=companion"
+      - "traefik.http.services.companion.loadbalancer.server.port=3020"
+    logging:
+      driver: "{{.configs.opencloud.docker.log_driver}}"
+    restart: "{{.configs.opencloud.docker.restart}}"
+
+volumes:
+  companion-data:

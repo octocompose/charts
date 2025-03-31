@@ -68,6 +68,7 @@ services:
           - "{{.configs.opencloud.domain.collabora}}"
           - "{{.configs.opencloud.domain.onlyoffice}}"
           - "{{.configs.opencloud.domain.wopiserver}}"
+          - "{{.configs.opencloud.domain.companion}}"
 
   opencloud:
     restart: "{{.configs.opencloud.docker.restart}}"
