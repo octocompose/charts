@@ -59,9 +59,9 @@ services:
       ## Database connection parameters. Don't touch them unless you are using custom
       ## postgresql connection parameters.
 
-      PENPOT_DATABASE_URI: {{.configs.penpot.postgres.url}}
-      PENPOT_DATABASE_USERNAME: {{.configs.penpot.postgres.user}}
-      PENPOT_DATABASE_PASSWORD: {{.configs.penpot.postgres.password}}
+      PENPOT_DATABASE_URI: "{{.configs.penpot.postgres.url}}"
+      PENPOT_DATABASE_USERNAME: "{{.configs.penpot.postgres.user}}"
+      PENPOT_DATABASE_PASSWORD: "{{.configs.penpot.postgres.password}}"
 
       ## Redis is used for the websockets notifications. Don't touch unless the redis
       ## container has different parameters or different name.
@@ -95,11 +95,11 @@ services:
       ## service, but for production usage it is recommended to setup a real SMTP
       ## provider. Emails are used to confirm user registrations & invitations.
 
-      PENPOT_SMTP_DEFAULT_FROM: {{.configs.smtp.from}}
-      PENPOT_SMTP_DEFAULT_REPLY_TO: {{.configs.smtp.reply_to}}
-      PENPOT_SMTP_HOST: {{.configs.smtp.host}}
-      PENPOT_SMTP_PORT: {{.configs.smtp.port}}
-      PENPOT_SMTP_USERNAME: {{.configs.smtp.username}}
-      PENPOT_SMTP_PASSWORD: {{.configs.smtp.password}}
-      PENPOT_SMTP_TLS: {{.configs.smtp.tls}}
-      PENPOT_SMTP_SSL: {{.configs.smtp.ssl}}
+      PENPOT_SMTP_DEFAULT_FROM: "{{.configs.smtp.from}}"
+      PENPOT_SMTP_DEFAULT_REPLY_TO: "{{.configs.smtp.reply_to}}"
+      PENPOT_SMTP_HOST: "{{.configs.smtp.host}}"
+      PENPOT_SMTP_PORT: "{{.configs.smtp.port}}"
+      PENPOT_SMTP_USERNAME: "{{.configs.smtp.username}}"
+      PENPOT_SMTP_PASSWORD: "{{.configs.smtp.password}}"
+      PENPOT_SMTP_TLS: "{{.configs.smtp.tls}}"
+      PENPOT_SMTP_SSL: "{{.configs.smtp.ssl}}"
