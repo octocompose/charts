@@ -6,7 +6,7 @@ repos:
     frontend:
       docker:
         registry: docker.io
-        image: penpot/frontend
+        image: penpotapp/frontend
         # https://hub.docker.com/r/penpotapp/frontend/tags
         tag: 2.5.4
 

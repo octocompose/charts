@@ -6,7 +6,7 @@ repos:
     exporter:
       docker:
         registry: docker.io
-        image: penpot/exporter
+        image: penpotapp/exporter
         # https://hub.docker.com/r/penpotapp/exporter/tags
         tag: 2.5.4
 

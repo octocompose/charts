@@ -9,7 +9,7 @@ repos:
 
 
 services:
-  penpot-backend:
+  backend:
     restart: always
 
     volumes:
