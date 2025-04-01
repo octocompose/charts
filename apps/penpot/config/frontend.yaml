@@ -25,8 +25,6 @@ services:
     environment:
       PENPOT_FLAGS: "{{.configs.penpot.flags}}"
       
-      # Max body size (30MiB); Used for plain requests, should never be
-      # greater than multi-part size
       PENPOT_HTTP_SERVER_MAX_BODY_SIZE: "{{.configs.penpot.sizes.max_body}}"
       
       # Max multipart body size (350MiB)

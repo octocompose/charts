@@ -1,0 +1,20 @@
+repos:
+  services:
+    mdpresentation-viewer:
+      docker:
+        registry: docker.io
+        image: jankaritech/mdpresentation-viewer
+        tag: 2.0.0
+        entrypoint: "/bin/sh"
+        command: ["-c", "cp -R /app/* /apps"]
+
+services:
+  opencloud:
+    depends_on:
+      mdpresentation-viewer:
+        condition: service_completed_successfully
+
+  mdpresentation-viewer:
+    user: root
+    volumes:
+      - opencloud-apps:/apps

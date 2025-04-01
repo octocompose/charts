@@ -3,7 +3,10 @@ configs:
     public_uri: http://localhost:9001
     flags: disable-email-verification enable-smtp enable-prepl-server disable-secure-session-cookies
     sizes:
+      # Max body size (30MiB); Used for plain requests, should never be
+      # greater than multi-part size
       max_body: 31457280
+      # Max multipart body size (350MiB)
       max_multipart_body: 367001600
     postgres:
       url: postgresql://postgres/penpot
