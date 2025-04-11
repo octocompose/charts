@@ -23,7 +23,7 @@ repos:
       docker:
         registry: docker.io
         image: opencloudeu/opencloud-rolling
-        tag: 2.0.0
+        tag: 2.1.0
         entrypoint: /bin/sh
         command: [ "-c", "opencloud collaboration server" ]
 

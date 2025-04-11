@@ -55,7 +55,8 @@ repos:
       docker:
         registry: docker.io
         image: opencloudeu/opencloud-rolling
-        tag: 2.0.0
+        # https://hub.docker.com/r/opencloudeu/opencloud-rolling/tags
+        tag: 2.1.0
         entrypoint: /bin/sh
         command: ["-c", "opencloud init || true; opencloud server"]
 
@@ -106,6 +107,9 @@ services:
       COMPANION_DOMAIN: "{{.configs.opencloud.domain.companion}}"
       # enable to allow using the banned passwords list
       OC_PASSWORD_POLICY_BANNED_PASSWORDS_LIST: banned-password-list.txt
+
+      # Enable inotify
+      STORAGE_USERS_POSIX_WATCH_FS: "true"
     volumes:
       - "{{.repos.files.opencloud_app_registry.path}}:/etc/opencloud/app-registry.yaml:ro"
       - "{{.repos.files.opencloud_csp.path}}:/etc/opencloud/csp.yaml:ro"

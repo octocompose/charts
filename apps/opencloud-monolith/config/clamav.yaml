@@ -5,7 +5,8 @@ repos:
         registry: docker.io
         image: clamav/clamav
         # release notes: https://blog.clamav.net
-        tag: 1.4.2-31
+        # https://hub.docker.com/r/clamav/clamav/tags
+        tag: 1.4.2-33
 
 services:
   opencloud:

@@ -5,6 +5,7 @@ repos:
         registry: docker.io
         image: apache/tika
         # release notes: https://tika.apache.org
+        # https://hub.docker.com/r/apache/tika/tags
         tag: 3.1.0.0-full
 
 services:

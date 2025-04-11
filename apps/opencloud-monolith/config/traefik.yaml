@@ -15,9 +15,10 @@ repos:
     traefik:
       docker:
         # release notes: https://github.com/traefik/traefik/releases
+        # https://hub.docker.com/_/traefik/tags
         registry: docker.io
         image: library/traefik
-        tag: v3.3.4
+        tag: v3.3.5
         command:
           - "--log.level=ERROR"
           # letsencrypt configuration

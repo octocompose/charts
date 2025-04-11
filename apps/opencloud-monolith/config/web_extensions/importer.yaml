@@ -44,6 +44,8 @@ services:
     user: root
     volumes:
       - opencloud-apps:/apps
+    networks:
+      - opencloud-net
 
   companion:
     networks:
